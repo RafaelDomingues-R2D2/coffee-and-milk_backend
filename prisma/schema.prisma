@@ -17,7 +17,82 @@ model User {
   password       String
   email          String   @unique
   avatar         String?
+
   created_at     DateTime @default(now())
   
   @@map("users")
+}
+
+model Order {
+  id            String @id @default(uuid())
+  status        Int @default(0)
+  cart          Boolean @default(true)
+
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @default(now())
+
+  @@map("orders")
+  items Item[]
+}
+
+model OrderStatus {
+  id            Int @id
+  title         String
+
+  @@map("orderStatus")
+}
+
+model Category {
+  id            String @id @default(uuid())
+  name          String
+  
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @default(now())
+
+  @@map("categories")
+  
+  products CategoriesOnProduct[]
+}
+
+model CategoriesOnProduct {
+  category_id   String
+  product_id    String
+
+  category Category @relation(fields: [category_id], references: [id])
+  product  Product  @relation(fields: [product_id], references: [id])
+
+  @@map("categoriesOnProducts")
+  @@id([product_id, category_id])
+}
+
+model Product {
+  id            String @id @default(uuid())
+
+  name          String
+  price         String
+  description   String
+  img           String
+
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @default(now())
+
+  @@map("products")
+  categories CategoriesOnProduct[]
+  items Item[]
+}
+
+model Item {
+  id            String @id @default(uuid())
+  order_id      String
+  product_id    String
+
+  amount        Int
+
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @default(now())
+
+  order Order @relation(fields: [order_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@map("items")
 }
