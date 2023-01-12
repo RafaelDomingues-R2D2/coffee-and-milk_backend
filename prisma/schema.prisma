@@ -67,11 +67,10 @@ model CategoriesOnProduct {
 
 model Product {
   id            String @id @default(uuid())
-
   name          String
   price         String
   description   String
-  img           String
+  img           String?
 
   created_at    DateTime? @default(now())
   updated_at    DateTime? @default(now())
