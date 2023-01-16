@@ -27,6 +27,7 @@ model Order {
   id            String @id @default(uuid())
   status        Int @default(0)
   cart          Boolean @default(true)
+  total         Float @default(0.00)
 
   created_at    DateTime? @default(now())
   updated_at    DateTime? @default(now())
@@ -45,6 +46,7 @@ model OrderStatus {
 model Category {
   id            String @id @default(uuid())
   name          String
+  description   String
   
   created_at    DateTime? @default(now())
   updated_at    DateTime? @default(now())
@@ -68,7 +70,7 @@ model CategoriesOnProduct {
 model Product {
   id            String @id @default(uuid())
   name          String
-  price         String
+  price         Float @default(0.00)
   description   String
   img           String?
 

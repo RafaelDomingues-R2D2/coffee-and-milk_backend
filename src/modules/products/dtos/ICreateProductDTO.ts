@@ -2,6 +2,6 @@ export interface ICreateProductDTO {
     id?: string
     name: string
     description: string
-    price: string
+    price: number
     img?: string 
 }
