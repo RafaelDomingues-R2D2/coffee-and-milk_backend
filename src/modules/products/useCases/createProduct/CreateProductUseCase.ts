@@ -6,13 +6,14 @@ import { IProductsRepository } from "../../repositores/IProductsRepository";
 
 @injectable()
 export class CreateProductUseCase {
+    
     constructor(
         @inject("ProductsRepository")
         private productsRepository: IProductsRepository
     ){}
 
     async execute({ name, description, price }: ICreateProductDTO): Promise<void>{
-        
+
         const productsAlreadyExists = await this.productsRepository.findByName(name)
 
         if(productsAlreadyExists)

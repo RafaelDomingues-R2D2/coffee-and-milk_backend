@@ -6,6 +6,9 @@ import { UsersRepository } from "../../modules/accounts/repositories/implementat
 import { IProductsRepository } from "../../modules/products/repositores/IProductsRepository"
 import { ProductsRepository } from "../../modules/products/repositores/implementations/ProductsRepository"
 
+import { IOrderRepository } from "../../modules/orders/repositores/IOrdersRepository"
+import { OrderRepository } from "../../modules/orders/repositores/implementations/OrderRepository"
+
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
     UsersRepository
@@ -14,4 +17,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IProductsRepository>(
     "ProductsRepository",
     ProductsRepository
+)
+
+container.registerSingleton<IOrderRepository>(
+    "OrdersRepository",
+    OrderRepository
 )
